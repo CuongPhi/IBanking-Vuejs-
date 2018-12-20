@@ -17,12 +17,17 @@ import MaterialDashboard from "./material-dashboard";
 
 import Chartist from "chartist";
 
+import store from "./store/store";
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
 
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+ 
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
@@ -36,49 +41,8 @@ new Vue({
   el: "#app",
   render: h => h(App),
   router,
+  store,
   data: {
     Chartist: Chartist
   }
-  // methods: {
-  //   submit: function () {
-  //     // this.status = "submitting";
-  //     this.$refs.recaptcha.execute();
-  //   },
-  //   onCaptchaVerified: function (recaptchaToken) {
-  //     const self = this;
-  //     self.status = "submitting";
-  //     self.$refs.recaptcha.reset();
-  //     axios.post("https://vue-recaptcha-demo.herokuapp.com/signup", {
-  //       email: self.email,
-  //       password: self.password,
-  //       recaptchaToken: recaptchaToken
-  //     }).then((response) => {
-  //       self.sucessfulServerResponse = response.data.message;
-  //     }).catch((err) => {
-  //       self.serverError = getErrorMessage(err);
-
-
-  //       //helper to get a displayable message to the user
-  //       function getErrorMessage(err) {
-  //         let responseBody;
-  //         responseBody = err.response;
-  //         if (!responseBody) {
-  //           responseBody = err;
-  //         }
-  //         else {
-  //           responseBody = err.response.data || responseBody;
-  //         }
-  //         return responseBody.message || JSON.stringify(responseBody);
-  //       }
-
-  //     }).then(() => {
-  //       self.status = "";
-  //     });
-
-
-  //   },
-  //   onCaptchaExpired: function () {
-  //     this.$refs.recaptcha.reset();
-  //   }
-  // }
 });
