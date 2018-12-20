@@ -38,7 +38,8 @@
             <p>Upgrade to PRO</p>
           </sidebar-link>
         </div>
-        <div>
+
+        <div v-if="!isLogin">
         <sidebar-link to="/login">
             <md-icon>notifications</md-icon>
             <p>Sign In</p>
@@ -47,12 +48,11 @@
             <md-icon>unarchive</md-icon>
             <p>Forgot Password</p>
           </sidebar-link>
-        </div>
-        
+        </div>        
       </side-bar>
 
       <div class="main-panel">
-        <top-navbar></top-navbar>
+        <top-navbar v-if="isLogin"></top-navbar>
 
         <dashboard-content></dashboard-content>
 
@@ -74,11 +74,16 @@ export default {
     DashboardContent,
     ContentFooter,
     MobileMenu
-  },
+  },  
   data() {
     return {
-      isLogin: true
+      isLogin: false
     }
+  },
+  mounted () {
+    this.$store.watch(this.$store.getters.isLogin, n => {
+      this.isLogin = n;
+    });
   }
 };
 </script>

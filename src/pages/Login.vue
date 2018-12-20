@@ -4,7 +4,7 @@
       <div class="md-layout-item md-medium-size-100 md-size-30"></div>
 
       <div class="md-layout-item md-medium-size-100 md-size-40">
-        <form>
+        <form @submit.prevent="onSubmit" method="post">
           <md-card>
             <md-card-header data-background-color="green">
               <h4 class="title">Login</h4>
@@ -52,11 +52,17 @@ export default {
       username: null,
       password: null,
       sitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
-      status: true
+      status: this.$store.state.isLogin
     };
   },
   methods: {
-    onSubmit: function() {},
+    onSubmit: function() {
+        if(!this.status) {
+          console.log(this.$store.state)
+          var x = this.$store.dispatch("login");
+          this.$router.push('/dashboard')
+        }
+    },
     onVerify: function(response) {
       this.status = false;
     },
