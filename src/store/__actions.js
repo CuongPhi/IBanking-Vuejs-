@@ -1,5 +1,8 @@
 export default {
-  login(ctx) {
-    ctx.commit("LOGIN");
+  login(ctx, account) {
+    ctx.commit("LOGIN", account);
+  },
+  re_login(ctx, obj) {
+    ctx.commit("RE_LOGIN", obj);
   }
 };
