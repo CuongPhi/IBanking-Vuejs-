@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div v-if="!isLogin" class="content">
     <div class="md-layout">
       <div class="md-layout-item md-medium-size-100 md-size-30"></div>
 
@@ -52,15 +52,27 @@ export default {
       username: null,
       password: null,
       sitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
-      status: this.$store.state.isLogin
+      status: true,
+      isLogin: true
     };
+  },
+  beforeCreate () {
+      this.$store.watch(this.$store.getters.isLogin, n => {
+        this.isLogin = n;
+      });
+      var user = JSON.parse(localStorage.current_user);
+      console.log(user);
+      if(user && user.access_token) {
+        this.$store.dispatch("re_login", {token: user.access_token, router: this.$router});
+      }
+  },
+  mounted() {
+    
   },
   methods: {
     onSubmit: function() {
         if(!this.status) {
-          console.log(this.$store.state)
-          var x = this.$store.dispatch("login");
-          this.$router.push('/dashboard')
+          this.$store.dispatch("login", {username: this.username, password: this.password, type: 0, router: this.$router});
         }
     },
     onVerify: function(response) {
