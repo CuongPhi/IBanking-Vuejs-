@@ -8,7 +8,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    transactions: [],
+    beneficiaries: []
   },
   getters: {
     isLogin: state => () => state.isLogin

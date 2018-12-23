@@ -15,28 +15,12 @@
           </sidebar-link>
           <sidebar-link to="/table">
             <md-icon>content_paste</md-icon>
-            <p>Table list</p>
+            <p>History</p>
           </sidebar-link>
-          <sidebar-link to="/typography">
+          <sidebar-link to="/beneficiary">
             <md-icon>library_books</md-icon>
-            <p>Typography</p>
-          </sidebar-link>
-          <sidebar-link to="/icons">
-            <md-icon>bubble_chart</md-icon>
-            <p>Icons</p>
-          </sidebar-link>
-          <sidebar-link to="/maps">
-            <md-icon>location_on</md-icon>
-            <p>Maps</p>
-          </sidebar-link>
-          <sidebar-link to="/notifications">
-            <md-icon>notifications</md-icon>
-            <p>Notifications</p>
-          </sidebar-link>
-          <sidebar-link to="/upgrade" class="active-pro">
-            <md-icon>unarchive</md-icon>
-            <p>Upgrade to PRO</p>
-          </sidebar-link>
+            <p>Beneficiary</p>
+          </sidebar-link> 
         </div>
 
         <div v-if="!this.$store.state.isLogin">
@@ -83,7 +67,7 @@ export default {
   mounted () {
     this.$store.watch(this.$store.getters.isLogin, n => {
       if(!n) {
-        this.$router.push('/login');
+      //  this.$router.push('/login');
       }
     });
   }

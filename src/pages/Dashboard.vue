@@ -150,7 +150,7 @@
             <p class="category">New employees on 15th September, 2016</p>
           </md-card-header>
           <md-card-content>
-            <ordered-table table-header-color="orange"></ordered-table>
+            <!-- <ordered-table table-header-color="orange"></ordered-table> -->
           </md-card-content>
         </md-card>
       </div>
@@ -185,7 +185,6 @@ import {
   ChartCard,
   NavTabsCard,
   NavTabsTable,
-  OrderedTable
 } from "@/components";
 
 export default {
@@ -194,7 +193,6 @@ export default {
     ChartCard,
     NavTabsCard,
     NavTabsTable,
-    OrderedTable
   },
   data() {
     return {

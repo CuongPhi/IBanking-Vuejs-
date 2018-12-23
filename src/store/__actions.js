@@ -7,5 +7,11 @@ export default {
   },
   logout(ctx, router) {
     ctx.commit("LOGOUT", router);
+  },
+  get_trans(ctx, obj) {
+    ctx.commit("GET_TRANS", obj);
+  },
+  get_beneficiary(ctx, obj) {
+    ctx.commit("GET_BENEFICIARY", obj);
   }
 };
