@@ -4,5 +4,8 @@ export default {
   },
   re_login(ctx, obj) {
     ctx.commit("RE_LOGIN", obj);
+  },
+  logout(ctx, router) {
+    ctx.commit("LOGOUT", router);
   }
 };

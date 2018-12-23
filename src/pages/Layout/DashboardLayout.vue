@@ -3,7 +3,7 @@
       <notifications></notifications>
 
       <side-bar >
-        <div v-if="isLogin">
+        <div v-if="this.$store.state.isLogin">
           <mobile-menu slot="content"></mobile-menu>
           <sidebar-link to="/dashboard">
             <md-icon>dashboard</md-icon>
@@ -39,7 +39,7 @@
           </sidebar-link>
         </div>
 
-        <div v-if="!isLogin">
+        <div v-if="!this.$store.state.isLogin">
         <sidebar-link to="/login">
             <md-icon>notifications</md-icon>
             <p>Sign In</p>
@@ -52,7 +52,7 @@
       </side-bar>
 
       <div class="main-panel">
-        <top-navbar v-if="isLogin"></top-navbar>
+        <top-navbar v-if="this.$store.state.isLogin"></top-navbar>
 
         <dashboard-content></dashboard-content>
 
@@ -77,12 +77,14 @@ export default {
   },  
   data() {
     return {
-      isLogin: false
+     
     }
   },
   mounted () {
     this.$store.watch(this.$store.getters.isLogin, n => {
-      this.isLogin = n;
+      if(!n) {
+        this.$router.push('/login');
+      }
     });
   }
 };

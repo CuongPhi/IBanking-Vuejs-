@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isLogin" class="content">
+  <div v-if="!this.$store.state.isLogin" class="content">
     <div class="md-layout">
       <div class="md-layout-item md-medium-size-100 md-size-30"></div>
 
@@ -53,22 +53,16 @@ export default {
       password: null,
       sitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
       status: true,
-      isLogin: true
     };
   },
-  beforeCreate () {
-      this.$store.watch(this.$store.getters.isLogin, n => {
-        this.isLogin = n;
-      });
+  mounted () { 
+      if(!localStorage.current_user) return;     
       var user = JSON.parse(localStorage.current_user);
-      console.log(user);
       if(user && user.access_token) {
-        this.$store.dispatch("re_login", {token: user.access_token, router: this.$router});
+        this.$store.dispatch("re_login", {token: user.access_token, id: user.uid, ref_token: user.refresh_token ,user_name: user.username , router: this.$router});
       }
   },
-  mounted() {
-    
-  },
+
   methods: {
     onSubmit: function() {
         if(!this.status) {
@@ -79,7 +73,7 @@ export default {
       this.status = false;
     },
     onExpired: function() {
-      console.log("Expired");
+      this.status = true;
     }
   }
 };
