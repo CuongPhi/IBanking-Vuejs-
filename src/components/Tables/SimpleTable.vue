@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-table v-model="trans" :table-header-color="tableHeaderColor">
+    <md-table v-model="this.$store.state.transactions" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="send">{{ item.account_send }}</md-table-cell>
         <md-table-cell md-label="recieve ">{{ item.account_recieve }}</md-table-cell>
@@ -31,8 +31,6 @@ export default {
   },
   data() {
     return {
-      selected: [],
-      trans: this.$store.state.transactions
     };
   }
 };
