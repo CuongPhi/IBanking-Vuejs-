@@ -9,7 +9,7 @@
           </md-card-header>
           <md-card-content>
              <div>
-                <md-table v-model="beneficiaries" table-header-color="green">
+                <md-table v-model="this.$store.state.beneficiaries" table-header-color="green">
                 <md-table-row slot="md-table-row" slot-scope="{ item }">
                     <md-table-cell md-label="Suggested name">{{ item.suggested_name }}</md-table-cell>
                     <md-table-cell md-label="Account number ">{{ item.account_number }}</md-table-cell>
@@ -37,8 +37,6 @@ export default {
   },
   data() {
     return {
-      selected: [],
-      beneficiaries: this.$store.state.beneficiaries
     };
   }
 };

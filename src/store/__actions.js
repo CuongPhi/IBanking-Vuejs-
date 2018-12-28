@@ -13,5 +13,8 @@ export default {
   },
   get_beneficiary(ctx, obj) {
     ctx.commit("GET_BENEFICIARY", obj);
+  },
+  get_current_user(ctx, obj) {
+     ctx.commit("GET_CURRENT_USER", obj);
   }
 };

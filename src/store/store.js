@@ -10,10 +10,12 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     transactions: [],
-    beneficiaries: []
+    beneficiaries: [],
+    user: {}
   },
   getters: {
-    isLogin: state => () => state.isLogin
+    isLogin: state => () => state.isLogin,
+    current_user: state => () => state.user
   },
   mutations: mutations,
   actions: actions

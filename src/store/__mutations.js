@@ -29,8 +29,14 @@ export default {
   },
   GET_BENEFICIARY(state, obj) {
     get_beneficiary(state, obj);
+  },
+  GET_CURRENT_USER(state, obj) {
+    get_current_user(state, obj);
   }
 };
+
+
+// #region list functions of mutations 
 var get_beneficiary = async(state, obj) => {  
   var obj_ = {...obj }
   delete obj_.router;
@@ -55,7 +61,6 @@ var get_trans = async (state, obj) => {
     if(auth) {
       state.transactions = auth.data;
       state.isLogin = true;
-      console.log(state.transactions)
     }
   } catch (err) {  // access-token expire
     if (err.response.status === 405) {
@@ -107,7 +112,6 @@ var re_login = async (state, obj) => {
   try {
     const auth = await Vue.axios.post( "http://localhost:1704/api/user/auth/", null, { headers: { "x-access-token": obj_.token }});
     if (auth) {
-      console.log(auth);
       state.isLogin = true;
       obj.router.push("/dashboard");
     }
@@ -134,3 +138,22 @@ var re_login = async (state, obj) => {
     }
   } 
 };
+var get_current_user = async (state, obj) =>{
+  var obj_ = {...obj }
+  delete obj_.router;
+  try {
+    const user = await Vue.axios.post( "http://localhost:1704/api/user/profile/", null , { headers: { "x-access-token": obj_.token }});
+    if(user) {
+      state.user = user.data;
+      //console.log(user.data)
+       return (user.data);
+    }
+  } catch (err) {  // access-token expire
+    if (err.response.status === 405) {
+      obj.router.push("/login");
+    }
+  } 
+}
+
+
+// end list functions of mutations
