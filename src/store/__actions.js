@@ -16,5 +16,8 @@ export default {
   },
   get_current_user(ctx, obj) {
      ctx.commit("GET_CURRENT_USER", obj);
+  },
+  update_user(ctx, obj) {
+    ctx.commit("UPDATE_USER", obj);
   }
 };

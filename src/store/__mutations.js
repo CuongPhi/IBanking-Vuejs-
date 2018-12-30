@@ -32,6 +32,9 @@ export default {
   },
   GET_CURRENT_USER(state, obj) {
     get_current_user(state, obj);
+  },
+  UPDATE_USER(state, obj) {
+    update_user(state, obj);
   }
 };
 
@@ -145,8 +148,6 @@ var get_current_user = async (state, obj) =>{
     const user = await Vue.axios.post( "http://localhost:1704/api/user/profile/", null , { headers: { "x-access-token": obj_.token }});
     if(user) {
       state.user = user.data;
-      //console.log(user.data)
-       return (user.data);
     }
   } catch (err) {  // access-token expire
     if (err.response.status === 405) {
@@ -155,5 +156,39 @@ var get_current_user = async (state, obj) =>{
   } 
 }
 
+var update_user = async (state, obj) => {
+  var c_user = {
+    ...obj.user_update
+  }
+  try {
+    const user = await Vue.axios.post( "http://localhost:1704/api/user/update/", c_user , { headers: { "x-access-token": obj.token }});
+    if(user) {
+      setMessage(state, "Update your profile successful !", true)
 
+    } else {
+      setMessage(state, "Update your profile fail !", false);
+    }
+
+  } catch (err) {  // access-token expire
+    if (err.response.status === 405) {
+      obj.router.push("/login");
+    }
+    else {
+      setMessage(state, "Update your profile fail !", false);
+  } 
+}
+}
+
+var setMessage = (state, msg, stt) =>{
+  state.notifications = {
+    status: stt,
+    msg: msg
+  }
+  setTimeout(()=>{
+    state.notifications = {
+      status: stt,
+      msg: null
+    }
+  } , 5000);
+}
 // end list functions of mutations

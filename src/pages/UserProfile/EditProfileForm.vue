@@ -11,7 +11,7 @@
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>User Name</label>
-              <md-input v-model="user.username" type="text"></md-input>
+              <md-input style="background: #eff0f1" :readonly="true" v-model="user.username" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
@@ -52,8 +52,10 @@
               <md-textarea v-model="user.about_me"></md-textarea>
             </md-field>
           </div>
-          <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success">Update Profile</md-button>
+          <div  v-if="this.user" class="md-layout-item md-size-100 text-right">
+                 <span v-if="this.$store.state.notifications.msg"> {{this.$store.state.notifications.msg}} </span>
+
+            <md-button @click="updateProfile" class="md-raised md-success">Update Profile</md-button>
           </div>
         </div>
 
@@ -81,6 +83,14 @@ export default {
         //.catch(err => console.log(err))
     }
   },
+  methods: {
+    updateProfile() {
+      var user = JSON.parse(localStorage.current_user);
+       if(user && user.access_token) {
+          this.$store.dispatch("update_user", { token: user.access_token, user_update: this.user, router : this.$router})
+       } 
+    }
+  },
   mounted() {        
       this.$store.watch(this.$store.getters.current_user, current_u => {     
         this.user = current_u;
@@ -94,7 +104,6 @@ export default {
         email: null,
         name: null,
         first_name: null,
-        address: null,
         about_me:
           "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.",
         address: null
