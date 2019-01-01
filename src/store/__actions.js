@@ -19,5 +19,14 @@ export default {
   },
   update_user(ctx, obj) {
     ctx.commit("UPDATE_USER", obj);
+  },
+  update_beneficary(ctx, obj) {
+    ctx.commit("UPDATE_BENEFICARY", obj);
+  },
+  check_bank_valid(ctx, obj) {
+    ctx.commit("CHECH_BANK_VALID", obj);
+  },
+  add_new_beneficary(ctx, obj) {
+    ctx.commit("ADD_NEW_BENEFICIARY", obj);
   }
 };

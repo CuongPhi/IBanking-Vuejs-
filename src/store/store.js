@@ -15,7 +15,8 @@ export default new Vuex.Store({
     notifications: {
       status: false,
       msg: null
-    }
+    },
+    canAddBeneficary: false
   },
   getters: {
     isLogin: state => () => state.isLogin,
