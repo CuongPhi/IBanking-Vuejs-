@@ -1,11 +1,32 @@
-# The final semester project "IBanking" Single Page Application (Vuejs)
+# The final semester project `IBanking` SPA (Vuejs)
 
 ## Informations
 ```
-	Nguyen Phi Cuong 1512050
-	Nguyen Tran Tuan Anh 1512006
+	### Information Technology - HCMUS
 	
+	### Team
+		#### Nguyen Phi Cuong 1512050
+		#### Nguyen Tran Tuan Anh 1512006
+		
+	### Teachers
+		#### Mr. Ngo Ngoc Dang Khoa
+		
+	### Technology
+		- Vuejs framework
+		- Dependencies, see more package.json: <https://github.com/CuongPhi/IBanking-frontend/blob/master/package.json>
 ```
+
+## Table of Contents
+
+* [Quick Start](#quick-start)
+* [Backend](#backend)
+* [File Structure](#file-structure)
+* [References](#references)
+* [Resources](#resources)
+* [Licensing](#licensing)
+* [Social Media](#social-media)
+
+
 
 
 ## Quick start
@@ -19,11 +40,10 @@
 ### build for production with minification
 `npm run build`
 
-- Clone the repo: `git clone https://github.com/CuongPhi/IBanking-frontend.git`.
 
-
-For detailed explanation on how things work, please contact me !
 ## File Structure
+Within the download you'll find the following directories and files:
+
 ```
 				IBanking-Vuejs
 				├── README.md
@@ -44,6 +64,15 @@ For detailed explanation on how things work, please contact me !
 					└── routes
 
 ```
+
+
+## Resources
+```
+Clone the repo: `git clone https://github.com/CuongPhi/IBanking-frontend.git`.
+
+For detailed explanation on how things work, please contact me !
+```
+
 
 ## Backend
 	
@@ -67,7 +96,7 @@ IBanking-Backend: <https://github.com/CuongPhi/IBanking-backend>
 
 
 
-##### Social Media
+## Social Media
 
 Facebook Group: <https://www.facebook.com/groups/cnm.th15.31/>
 
