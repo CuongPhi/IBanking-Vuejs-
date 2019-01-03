@@ -1,8 +1,8 @@
 # The final semester project `IBanking` SPA (Vuejs)
 
 ## Informations
-```
-	### Information Technology - HCMUS
+
+	### Information Technology - HCMUS 2018-2019
 	
 	### Team
 		#### Nguyen Phi Cuong 1512050
@@ -14,7 +14,7 @@
 	### Technology
 		- Vuejs framework
 		- Dependencies, see more package.json: <https://github.com/CuongPhi/IBanking-frontend/blob/master/package.json>
-```
+
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@
 * [References](#references)
 * [Resources](#resources)
 * [Licensing](#licensing)
-* [Social Media](#social-media)
+* [Contacts](#contacts)
 
 
 
@@ -70,13 +70,14 @@ Within the download you'll find the following directories and files:
 ```
 Clone the repo: `git clone https://github.com/CuongPhi/IBanking-frontend.git`.
 
-For detailed explanation on how things work, please contact me !
+For detailed explanation on how things work, please [contacts me !](#contacts)
 ```
 
 
 ## Backend
 	
-IBanking-Backend: <https://github.com/CuongPhi/IBanking-backend>
+  Backend using Nodejs with Expressjs framework, Mysql databas,... to build API RESTful Web services, see more : 
+- IBanking-Backend: <https://github.com/CuongPhi/IBanking-backend>
 
 
 	
@@ -96,9 +97,9 @@ IBanking-Backend: <https://github.com/CuongPhi/IBanking-backend>
 
 
 
-## Social Media
+## Contacts
 
-Facebook Group: <https://www.facebook.com/groups/cnm.th15.31/>
+- Facebook Group: <https://www.facebook.com/groups/cnm.th15.31/>
 
-My Facebook: <https://www.facebook.com/ficuong>
+- My Facebook: <https://www.facebook.com/ficuong>
 
