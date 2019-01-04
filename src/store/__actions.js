@@ -28,5 +28,11 @@ export default {
   },
   add_new_beneficary(ctx, obj) {
     ctx.commit("ADD_NEW_BENEFICIARY", obj);
+  },
+  set_cant_do_beneficiary(ctx) {
+    ctx.commit("SET_CANT_DO_BENEFICIARY");
+  },
+  delete_beneficary(ctx, obj) {
+    ctx.commit("DELETE_BENEFICIARY", obj);
   }
 };

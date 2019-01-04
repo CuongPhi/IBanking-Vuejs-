@@ -2,18 +2,18 @@
 
 ## Informations
 
-	### Information Technology - HCMUS 2018-2019
-	
-	### Team
-		#### Nguyen Phi Cuong 1512050
-		#### Nguyen Tran Tuan Anh 1512006
+### HCMUS 2018-2019	
+#### Information Technology
+### Team
+#### Nguyen Phi Cuong 1512050
+#### Nguyen Tran Tuan Anh 1512006
 		
-	### Teachers
-		#### Mr. Ngo Ngoc Dang Khoa
+### Teachers
+#### Mr. Ngo Ngoc Dang Khoa
 		
-	### Technology
-		- Vuejs framework
-		- Dependencies, see more package.json: <https://github.com/CuongPhi/IBanking-frontend/blob/master/package.json>
+### Technology
+	- Vuejs framework
+	- Dependencies, see more package.json: <https://github.com/CuongPhi/IBanking-frontend/blob/master/package.json>
 
 
 ## Table of Contents
@@ -70,13 +70,13 @@ Within the download you'll find the following directories and files:
 ```
 Clone the repo: `git clone https://github.com/CuongPhi/IBanking-frontend.git`.
 
-For detailed explanation on how things work, please [contacts me !](#contacts)
+For detailed explanation on how things work, please contacts me with facebook !
 ```
 
 
 ## Backend
 	
-  Backend using Nodejs with Expressjs framework, Mysql databas,... to build API RESTful Web services, see more : 
+  Backend using Nodejs with Expressjs framework, Mysql database,... to build API RESTful Web services, see more : 
 - IBanking-Backend: <https://github.com/CuongPhi/IBanking-backend>
 
 
@@ -85,7 +85,11 @@ For detailed explanation on how things work, please [contacts me !](#contacts)
 
 - Vue templating: <https://www.creative-tim.com/product/vue-material-dashboard>
 
-- Demo projects vuejs: bacsic, router, store, ... - Mr.Khoa
+- Demo source code: bacsic, router, store, ... - Mr.Khoa
+
+- Vuejs documentation (Guide 2.x): <https://vuejs.org/v2/guide/>
+
+- Stackoverflow, other blogs, ...
 
 
 
@@ -99,7 +103,7 @@ For detailed explanation on how things work, please [contacts me !](#contacts)
 
 ## Contacts
 
-- Facebook Group: <https://www.facebook.com/groups/cnm.th15.31/>
+- Facebook Class Group: <https://www.facebook.com/groups/cnm.th15.31/>
 
 - My Facebook: <https://www.facebook.com/ficuong>
 

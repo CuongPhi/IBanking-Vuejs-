@@ -32,6 +32,13 @@ export default {
   },
   ADD_NEW_BENEFICIARY(state, obj) {
     add_new_beneficiary(state, obj);
+  },
+  SET_CANT_DO_BENEFICIARY(state) {
+    state.canAddBeneficary = false;
+    state.nameAddBe = null;
+  },
+  DELETE_BENEFICIARY(state, obj) {
+    delete_beneficiary(state, obj);
   }
 };
 
@@ -57,10 +64,8 @@ export default {
  }
  
 var get_beneficiary = async(state, obj) => {  
-  var obj_ = {...obj }
-  delete obj_.router;
   try {
-    const auth = await Vue.axios.post( "http://localhost:1704/api/account/beneficiaries/", null , { headers: { "x-access-token": obj_.token }});
+    const auth = await Vue.axios.post( "http://localhost:1704/api/account/beneficiaries/", null , { headers: { "x-access-token": obj.token }});
     if(auth) {
       state.beneficiaries = auth.data;
       state.isLogin = true;
@@ -72,10 +77,8 @@ var get_beneficiary = async(state, obj) => {
   } 
 }
 var get_trans = async (state, obj) => {
-  var obj_ = {...obj }
-  delete obj_.router;
   try {
-    const auth = await Vue.axios.post( "http://localhost:1704/api/account/transhistory/", null , { headers: { "x-access-token": obj_.token }});
+    const auth = await Vue.axios.post( "http://localhost:1704/api/account/transhistory/", null , { headers: { "x-access-token": obj.token }});
     if(auth) {
       state.transactions = auth.data;
       state.isLogin = true;
@@ -120,10 +123,8 @@ var re_login = async (state, obj) => {
   } 
 };
 var get_current_user = async (state, obj) =>{
-  var obj_ = {...obj }
-  delete obj_.router;
   try {
-    const user = await Vue.axios.post( "http://localhost:1704/api/user/profile/", null , { headers: { "x-access-token": obj_.token }});
+    const user = await Vue.axios.post( "http://localhost:1704/api/user/profile/", null , { headers: { "x-access-token": obj.token }});
     if(user) {
       state.user = user.data;
     }
@@ -177,8 +178,8 @@ var update_beneficiary = async (state, obj) => {
   try {
     const user = await Vue.axios.post( "http://localhost:1704/api/account/update_beneficiary/", sgname , { headers: { "x-access-token": obj.token }});
     if(user) {
-      setMessage(state, "Update beneficiary successful !", true)
-
+      setMessage(state, "Update beneficiary successful !", true);
+      state.canAddBeneficary = false;
     } else {
       setMessage(state, "Update beneficiary fail !", false);
     }
@@ -194,13 +195,16 @@ var update_beneficiary = async (state, obj) => {
 }
 
 var chech_bank_valid = async (state, obj) =>{
+  state.nameAddBe = null;
   var number = {
     ...obj.number
   }
+  state.canAddBeneficary = false;
   try {
     const num_ber = await Vue.axios.post( "http://localhost:1704/api/account/check_bank_valid/", number , { headers: { "x-access-token": obj.token }});
     if(num_ber) {
       state.canAddBeneficary = true;
+      state.nameAddBe = num_ber.data.name + " " + num_ber.data.first_name;
       setMessage(state, "You can add this bank account number !", true)
 
     } else {
@@ -233,6 +237,7 @@ var add_new_beneficiary = async (state, obj) =>{
         }
       ]
       setMessage(state, "Add new beneficiary successful !", true)
+      state.canAddBeneficary = false;
     //  get_beneficiary(state, obj);
 
     } else {
@@ -248,4 +253,36 @@ var add_new_beneficiary = async (state, obj) =>{
   } 
  }
 } 
+
+
+var delete_beneficiary = async (state, obj) => {
+  console.log("aaa")
+  var be = {
+    ...obj.beneficiary
+  }
+  try {
+    const num_ber = await Vue.axios.post( "http://localhost:1704/api/account/deletebeneficiary/", be , { headers: { "x-access-token": obj.token }});
+    if(num_ber) {
+      var list_be = JSON.parse( JSON.stringify(state.beneficiaries));
+
+      list_be = list_be.filter(item => item.account_number !== be.num);
+
+      state.beneficiaries = list_be;    
+      setMessage(state, "Delete beneficiary successful !", true)
+      state.canAddBeneficary = false;
+    //  get_beneficiary(state, obj);
+
+    } else {
+      setMessage(state, "Delete beneficiary fail !", false);
+    }
+
+  } catch (err) {  // access-token expire
+    if (err.response.status === 405) {
+      obj.router.push("/login");
+    }
+    else {
+      setMessage(state, "Delete beneficiary fail !", false);
+  } 
+ }
+}
 // end list functions of mutations
