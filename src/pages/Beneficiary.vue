@@ -17,7 +17,7 @@
                     <md-button @click="update(item.account_number, item.suggested_name)" class="md-icon-button  md-raised md-info">
                       <md-icon>edit</md-icon>
                       </md-button> 
-                    <md-button @click="delete(item.account_number)" class="md-icon-button  md-raised md-danger">
+                    <md-button @click="delete_be(item.account_number)" class="md-icon-button  md-raised md-danger">
                       <md-icon>backspace</md-icon>
                       </md-button> 
 
@@ -85,6 +85,11 @@ export default {
       if(user && user.access_token) {
         this.$store.dispatch("get_beneficiary", {token: user.access_token, id: user.uid, ref_token: user.refresh_token ,user_name: user.username , router: this.$router});
       }
+
+     this.$store.watch(this.$store.getters.nameAddBe, name => {     
+       if(name)
+          this.sg_name = name;
+    });
   },
   data() {
     return {
@@ -96,13 +101,23 @@ export default {
   },
   methods: {
     add_new() {
-            this.show_add= true;
-           this.type = "Add new";
-           this.sg_name = null;
-          this.num=null;
+          this.show_add = true;
+          this.type = "Add new";
+          this.sg_name = null;
+          this.num = null;
+          this.validationShow();
     },
-    delete(be) {
-
+    delete_be(num) {
+      if(!localStorage.current_user) return;     
+         var user = JSON.parse(localStorage.current_user);
+        if(user && user.access_token) {
+        if(confirm(`Do you want to delete ${num} ?`)) {
+          this.$store.dispatch("delete_beneficary", {token: user.access_token, 
+            beneficiary: {
+              num : num,         
+            }, router: this.$router});
+        }
+      }
     },
     Process() {
       if(!localStorage.current_user) return;     
@@ -132,6 +147,7 @@ export default {
       this.num=num;
       this.show_add= true;
       this.type = "Update this";
+      this.validationShow();
     },
     checkValidBankAccountNumber(e) {
       //console.log(e.key);
@@ -146,12 +162,20 @@ export default {
                 }
             , router: this.$router});
           }
+      } else {
+          if(this.$store.state.canAddBeneficary) {
+            this.validationShow();
+          }
       }
+      
     },
     keydown(e) {     
      if(e.key == "." || e.key == "e" || (this.num && this.num.length == 13 && e.key != "Backspace")) {
         e.preventDefault();
       }
+    },
+    validationShow(){
+        this.$store.dispatch("set_cant_do_beneficiary");
     }
   },
 };
