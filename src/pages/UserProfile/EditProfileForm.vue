@@ -53,7 +53,7 @@
             </md-field>
           </div>
           <div  v-if="this.user" class="md-layout-item md-size-100 text-right">
-                 <span v-if="this.$store.state.notifications.msg"> {{this.$store.state.notifications.msg}} </span>
+                 <span v-bind:class="{'success': this.$store.state.notifications.status, 'error': !this.$store.state.notifications.status}" v-if="this.$store.state.notifications.msg"> {{this.$store.state.notifications.msg}} </span>
 
             <md-button @click="updateProfile" class="md-raised md-success">Update Profile</md-button>
           </div>

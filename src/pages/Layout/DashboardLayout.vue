@@ -1,13 +1,13 @@
 <template>
     <div class="wrapper" :class="{'nav-open': $sidebar.showSidebar}">
-      <notifications></notifications>
+      <!-- <notifications></notifications> -->
 
       <side-bar >
         <div v-if="this.$store.state.isLogin">
           <mobile-menu slot="content"></mobile-menu>
-          <sidebar-link to="/dashboard">
+          <sidebar-link to="/accounts">
             <md-icon>dashboard</md-icon>
-            <p>Dashboard</p>
+            <p>Account number</p>
           </sidebar-link>
           <sidebar-link to="/user">
             <md-icon>person</md-icon>

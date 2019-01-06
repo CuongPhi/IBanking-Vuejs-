@@ -11,17 +11,20 @@ export default new Vuex.Store({
     isLogin: false,
     transactions: [],
     beneficiaries: [],
-    accounts: [],
     user: {},
     notifications: {
       status: false,
       msg: null
     },
+    canAddBeneficary: false,
+    nameAddBe : null,
+    accounts: []
   },
   getters: {
     isLogin: state => () => state.isLogin,
     current_user: state => () => state.user,
-    accounts: state => () => state.accounts
+    accounts: state => () => state.accounts,
+    nameAddBe: state => () => state.nameAddBe
   },
   mutations: mutations,
   actions: actions

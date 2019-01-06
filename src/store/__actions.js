@@ -20,7 +20,25 @@ export default {
   update_user(ctx, obj) {
     ctx.commit("UPDATE_USER", obj);
   },
+  update_beneficary(ctx, obj) {
+    ctx.commit("UPDATE_BENEFICARY", obj);
+  },
+  check_bank_valid(ctx, obj) {
+    ctx.commit("CHECH_BANK_VALID", obj);
+  },
+  add_new_beneficary(ctx, obj) {
+    ctx.commit("ADD_NEW_BENEFICIARY", obj);
+  },
+  set_cant_do_beneficiary(ctx) {
+    ctx.commit("SET_CANT_DO_BENEFICIARY");
+  },
+  delete_beneficary(ctx, obj) {
+    ctx.commit("DELETE_BENEFICIARY", obj);
+  },
   get_accounts(ctx, obj) {
     ctx.commit("GET_ACCOUNTS", obj);
+  },
+  delete_bank_account(ctx, obj) {
+    ctx.commit("DELETE_BANK_ACCOUNT", obj);
   }
 };

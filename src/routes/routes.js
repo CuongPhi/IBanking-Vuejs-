@@ -1,11 +1,11 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
-import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 import TableList from "@/pages/TableList.vue";
 import Login from "@/pages/Login.vue";
 import Beneficiary from "@/pages/Beneficiary.vue";
 import TransferMoney from "@/pages/TransferMoney.vue";
+import Accounts from "@/pages/Accounts.vue"
 
 const routes = [
   {
@@ -17,11 +17,6 @@ const routes = [
         path: "login",
         name: "Login",
         component: Login
-      },
-      {
-        path: "dashboard",
-        name: "Dashboard",
-        component: Dashboard
       },
       {
         path: "user",
@@ -42,6 +37,11 @@ const routes = [
         path: "transfer",
         name: "Transfer Money",
         component: TransferMoney
+      },
+      { 
+        path: "accounts",
+        name: "Accounts",
+        component: Accounts
       }
     ]
   }
