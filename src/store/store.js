@@ -17,7 +17,8 @@ export default new Vuex.Store({
       msg: null
     },
     canAddBeneficary: false,
-    nameAddBe : null
+    nameAddBe : null,
+    accounts: []
   },
   getters: {
     isLogin: state => () => state.isLogin,

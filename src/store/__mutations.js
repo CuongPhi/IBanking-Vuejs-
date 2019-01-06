@@ -39,6 +39,9 @@ export default {
   },
   DELETE_BENEFICIARY(state, obj) {
     delete_beneficiary(state, obj);
+  },
+  GET_ACCOUNTS(state, obj) {
+    get_accounts(state, obj);
   }
 };
 
@@ -56,7 +59,7 @@ export default {
       .then(response => {
         localStorage.current_user = JSON.stringify(response.data.user);
         state.isLogin = true;
-        router.push("/dashboard");
+        router.push("/accounts");
       })
       .catch(err => {
         console.log(err);
@@ -97,7 +100,7 @@ var re_login = async (state, obj) => {
     const auth = await Vue.axios.post( "http://localhost:1704/api/user/auth/", null, { headers: { "x-access-token": obj_.token }});
     if (auth) {
       state.isLogin = true;
-      obj.router.push("/dashboard");
+      obj.router.push("/accounts");
     }
   } catch (err) {  // access-token expire
     if (err.response.status === 405) {
@@ -110,7 +113,7 @@ var re_login = async (state, obj) => {
             obj_.access_token = newtoken;
             localStorage.current_user = JSON.stringify(newUser);
             state.isLogin = true;
-            obj.router.push("/dashboard");
+            obj.router.push("/accounts");
         }
       } catch (err) {
          if (err.response.status === 500) {
@@ -284,5 +287,18 @@ var delete_beneficiary = async (state, obj) => {
       setMessage(state, "Delete beneficiary fail !", false);
   } 
  }
+}
+
+var get_accounts = async (state, obj) => {
+  try {
+    const auth = await Vue.axios.post( "http://localhost:1704/api/account/accounts/", null , { headers: { "x-access-token": obj.token }});
+    if(auth) {
+      state.accounts = auth.data;
+    }
+  } catch (err) {  // access-token expire
+    if (err.response.status === 405) {
+      obj.router.push("/login");
+    }
+  } 
 }
 // end list functions of mutations

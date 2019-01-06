@@ -34,5 +34,8 @@ export default {
   },
   delete_beneficary(ctx, obj) {
     ctx.commit("DELETE_BENEFICIARY", obj);
+  },
+  get_accounts(ctx, obj) {
+    ctx.commit("GET_ACCOUNTS", obj);
   }
 };

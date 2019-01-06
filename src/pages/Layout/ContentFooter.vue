@@ -4,7 +4,7 @@
         <nav>
             <ul>
               <li>
-                <router-link :to="{path:'/dashboard'}">Home</router-link>
+                <router-link :to="{path:'/account'}">account</router-link>
               </li>
                 <li>
                     <a href="#">
@@ -24,7 +24,7 @@
             </ul>
         </nav>
         <div class="copyright text-center">
-          &copy; {{ new Date().getFullYear() }} <a href="https://www.creative-tim.com/?ref=mdf-vuejs" target="_blank">Creative Tim</a>, made with <i class="fa fa-heart heart"></i> for a better web
+          &copy; {{ new Date().getFullYear() }} <a href="https://www.creative-tim.com/?ref=mdf-vuejs" target="_blank">Ibanking</a>, made with <i class="fa fa-heart heart"></i> !!!
         </div>
     </div>
   </footer>
