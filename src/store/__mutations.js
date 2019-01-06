@@ -42,6 +42,9 @@ export default {
   },
   GET_ACCOUNTS(state, obj) {
     get_accounts(state, obj);
+  },
+  DELETE_BANK_ACCOUNT(state, obj) {
+    delete_bank_account(state, obj);
   }
 };
 
@@ -145,7 +148,13 @@ var update_user = async (state, obj) => {
   try {
     const user = await Vue.axios.post( "http://localhost:1704/api/user/update/", c_user , { headers: { "x-access-token": obj.token }});
     if(user) {
-      setMessage(state, "Update your profile successful !", true)
+    //   state.user.find((o, i) => {
+    //     if (o.uid === c_user.uid) {
+    //         state.user[i] = c_user;
+    //         return true; // stop searching
+    //     }
+    // });
+          setMessage(state, "Update your profile successful !", true)
 
     } else {
       setMessage(state, "Update your profile fail !", false);
@@ -183,6 +192,13 @@ var update_beneficiary = async (state, obj) => {
     if(user) {
       setMessage(state, "Update beneficiary successful !", true);
       state.canAddBeneficary = false;
+      state.beneficiaries.find((o, i) => {
+        if (o.account_number === sgname.account_number) {
+            state.beneficiaries[i].suggested_name = sgname.sg_name;
+            return true; // stop searching
+        }
+    });
+    
     } else {
       setMessage(state, "Update beneficiary fail !", false);
     }
@@ -294,6 +310,27 @@ var get_accounts = async (state, obj) => {
     const auth = await Vue.axios.post( "http://localhost:1704/api/account/accounts/", null , { headers: { "x-access-token": obj.token }});
     if(auth) {
       state.accounts = auth.data;
+    }
+  } catch (err) {  // access-token expire
+    if (err.response.status === 405) {
+      obj.router.push("/login");
+    }
+  } 
+}
+
+var delete_bank_account = async (state, obj) => {
+  var be = {
+    ...obj.beneficiary
+  }
+  try {
+    const auth = await Vue.axios.post( "http://localhost:1704/api/account/delete_bank_account/", be , { headers: { "x-access-token": obj.token }});
+    if(auth) {
+      var list_b = JSON.parse( JSON.stringify(state.accounts));
+
+      list_b = list_b.filter(item => item.account_number !== be.account_number);
+
+      state.accounts = list_b;    
+      setMessage(state, `Delete bank account ${be.account_number} successful !`, true)
     }
   } catch (err) {  // access-token expire
     if (err.response.status === 405) {

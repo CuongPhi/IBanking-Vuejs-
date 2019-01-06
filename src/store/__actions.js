@@ -37,5 +37,8 @@ export default {
   },
   get_accounts(ctx, obj) {
     ctx.commit("GET_ACCOUNTS", obj);
+  },
+  delete_bank_account(ctx, obj) {
+    ctx.commit("DELETE_BANK_ACCOUNT", obj);
   }
 };

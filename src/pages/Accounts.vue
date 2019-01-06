@@ -66,16 +66,21 @@ export default {
   },
   methods: {
      delete_be(num) {
+      if(this.$store.state.accounts.length == 1) {
+          alert("Your account must have 1 bank account number !");
+          return;
+      }
       if(!localStorage.current_user) return;     
          var user = JSON.parse(localStorage.current_user);
         if(user && user.access_token) {
-        if(confirm(`Do you want to delete ${num} ?`)) {
-          this.$store.dispatch("delete_beneficary", {token: user.access_token, 
-            beneficiary: {
-              num : num,         
-            }, router: this.$router});
+
+            if(confirm(`Do you want to delete ${num} ?`)) {
+            this.$store.dispatch("delete_bank_account", {token: user.access_token, 
+                beneficiary: {
+                account_number : num,         
+                }, router: this.$router});
+            }
         }
-      }
     },
     Process() {
      
