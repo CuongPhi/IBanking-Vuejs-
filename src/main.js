@@ -23,6 +23,7 @@ const router = new VueRouter({
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
+import './assets/css/main.css';
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';

@@ -62,7 +62,7 @@
             </md-field>
           </div>
           <div  class="md-layout-item md-size-100 text-right">
-                 <span v-if="this.$store.state.notifications.msg"> {{this.$store.state.notifications.msg}} </span>
+                 <span v-bind:class="{'success': this.$store.state.notifications.status, 'error': !this.$store.state.notifications.status}" v-if="this.$store.state.notifications.msg"> {{this.$store.state.notifications.msg}} </span>
 
             <md-button @click="Process()" :disabled="(this.type == 'Update this' || this.$store.state.canAddBeneficary) ? false : true "  class="md-raised md-success">{{this.type}} beneficary</md-button>
           </div>
