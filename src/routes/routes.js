@@ -5,6 +5,7 @@ import UserProfile from "@/pages/UserProfile.vue";
 import TableList from "@/pages/TableList.vue";
 import Login from "@/pages/Login.vue";
 import Beneficiary from "@/pages/Beneficiary.vue";
+import TransferMoney from "@/pages/TransferMoney.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
         path: "beneficiary",
         name: "Beneficiary",
         component: Beneficiary
+      },
+      {
+        path: "transfer",
+        name: "Transfer Money",
+        component: TransferMoney
       }
     ]
   }

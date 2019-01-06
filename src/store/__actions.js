@@ -19,5 +19,8 @@ export default {
   },
   update_user(ctx, obj) {
     ctx.commit("UPDATE_USER", obj);
+  },
+  get_accounts(ctx, obj) {
+    ctx.commit("GET_ACCOUNTS", obj);
   }
 };

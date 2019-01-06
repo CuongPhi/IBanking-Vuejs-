@@ -7,10 +7,14 @@ import StatsCard from "./Cards/StatsCard.vue";
 import NavTabsTable from "./Tables/NavTabsTable.vue";
 import SimpleTable from "./Tables/SimpleTable.vue";
 
+// Forms
+import TransferForm from "./Forms/TransferMoney.vue";
+
 export {
   ChartCard,
   NavTabsCard,
   StatsCard,
   NavTabsTable,
-  SimpleTable
+  SimpleTable,
+  TransferForm
 };

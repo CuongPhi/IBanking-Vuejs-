@@ -35,11 +35,29 @@ export default {
   },
   UPDATE_USER(state, obj) {
     update_user(state, obj);
-  }
+  },
+  GET_ACCOUNTS(state, obj) {
+    get_accounts(state, obj);
+  },
 };
 
 
-// #region list functions of mutations 
+// #region list functions of mutations
+var get_accounts = async(state, obj) => {  
+  var obj_ = {...obj }
+  delete obj_.router;
+  try {
+    const auth = await Vue.axios.post( "http://localhost:1704/api/account/accounts/", null , { headers: { "x-access-token": obj_.token }});
+    if(auth) {
+      state.accounts = auth.data;
+      state.isLogin = true;
+    }
+  } catch (err) {  // access-token expire
+    if (err.response.status === 405) {
+      obj.router.push("/login");
+    }
+  } 
+} 
 var get_beneficiary = async(state, obj) => {  
   var obj_ = {...obj }
   delete obj_.router;
@@ -148,6 +166,7 @@ var get_current_user = async (state, obj) =>{
     const user = await Vue.axios.post( "http://localhost:1704/api/user/profile/", null , { headers: { "x-access-token": obj_.token }});
     if(user) {
       state.user = user.data;
+      console.log(state.user);
     }
   } catch (err) {  // access-token expire
     if (err.response.status === 405) {
