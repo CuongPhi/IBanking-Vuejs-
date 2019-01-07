@@ -11,35 +11,35 @@
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Tài khoản nguồn</label>
-              <md-select required>
+              <md-select required v-model="send">
                 <md-option v-for="account in accounts" v-bind:key="account.balance" :value="account.account_number" >{{ account.account_number }}</md-option>
               </md-select>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Receiver Account</label>
-              <md-input required></md-input>
+              <label>Reciever Account</label>
+              <md-input v-model="recieve" type="number"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Amount</label>
-              <md-input required type="number"> </md-input>
+              <md-input v-model="money" required type="number"> </md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Nội dung gửi</label>
-              <md-input type="text"> </md-input>
+              <md-input v-model="note" type="text"> </md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Chọn hình thức thanh toán</label>
               <md-select v-model="selected">
-                <md-option value="1">sender</md-option>
-                <md-option value="2">receiver</md-option>
+                <md-option value="0">sender</md-option>
+                <md-option value="1">receiver</md-option>
               </md-select>
             </md-field>
           </div>
@@ -80,11 +80,21 @@ export default {
   methods: {
     updateProfile() {
       var user = JSON.parse(localStorage.current_user);
+      var d = new Date();
        if(user && user.access_token) {
-          this.$store.dispatch("update_user", { token: user.access_token, user_update: this.user, router : this.$router})
+          this.$store.dispatch("add_new_tran", { token: user.access_token, 
+          transaction : {
+            send : this.send,
+            recieve : this.recieve,
+            money : this.money,
+            note : this.note,
+            type : this.selected
+          },
+          router : this.$router, 
+          });
        } 
     }
-  },
+  }, 
   mounted() {        
       this.$store.watch(this.$store.getters.accounts, acc => {     
         this.accounts = acc;
@@ -93,7 +103,11 @@ export default {
   data() {
     return {
       accounts: [],
-      selected: '1'
+      selected: '0',
+      send: null,
+      recieve: null,
+      money: null,
+      note: null
     }
   }
 };

@@ -43,7 +43,7 @@
    <form v-if="show_add">
     <md-card>
       <md-card-header data-background-color="blue">
-        <h4 class="title">{{this.type}} Beneficary</h4>
+        <h4 class="title">{{this.type}} Beneficiary</h4>
       </md-card-header>
 
       <md-card-content>
@@ -64,7 +64,7 @@
           <div  class="md-layout-item md-size-100 text-right">
                  <span v-bind:class="{'success': this.$store.state.notifications.status, 'error': !this.$store.state.notifications.status}" v-if="this.$store.state.notifications.msg"> {{this.$store.state.notifications.msg}} </span>
 
-            <md-button @click="Process()" :disabled="(this.type == 'Update this' || this.$store.state.canAddBeneficary) ? false : true "  class="md-raised md-success">{{this.type}} beneficary</md-button>
+            <md-button @click="Process()" :disabled="(this.type == 'Update this' || this.$store.state.canAddBeneficiary) ? false : true "  class="md-raised md-success">{{this.type}} beneficiary</md-button>
           </div>
         </div>
 
@@ -112,7 +112,7 @@ export default {
          var user = JSON.parse(localStorage.current_user);
         if(user && user.access_token) {
         if(confirm(`Do you want to delete ${num} ?`)) {
-          this.$store.dispatch("delete_beneficary", {token: user.access_token, 
+          this.$store.dispatch("delete_beneficiary", {token: user.access_token, 
             beneficiary: {
               num : num,         
             }, router: this.$router});
@@ -124,7 +124,7 @@ export default {
          var user = JSON.parse(localStorage.current_user);
       if(user && user.access_token) {
        if(this.type === "Add new") {
-          this.$store.dispatch("add_new_beneficary", {token: user.access_token, 
+          this.$store.dispatch("add_new_beneficiary", {token: user.access_token, 
           beneficiary: {
             num : this.num,
             sg_name : this.sg_name, 
@@ -132,7 +132,7 @@ export default {
           }, router: this.$router});
 
        } else if(this.type === "Update this") {
-            this.$store.dispatch("update_beneficary", {token: user.access_token,
+            this.$store.dispatch("update_beneficiary", {token: user.access_token,
             beneficiary : {
                 account_number: this.num,
                sg_name: this.sg_name
@@ -163,7 +163,7 @@ export default {
             , router: this.$router});
           }
       } else {
-          if(this.$store.state.canAddBeneficary) {
+          if(this.$store.state.canAddBeneficiary) {
             this.validationShow();
           }
       }

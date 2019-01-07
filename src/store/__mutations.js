@@ -24,7 +24,7 @@ export default {
   UPDATE_USER(state, obj) {
     update_user(state, obj);
   },
-  UPDATE_BENEFICARY(state, obj){
+  UPDATE_BENEFICIARY(state, obj){
     update_beneficiary(state, obj);
   },
   CHECH_BANK_VALID(state, obj) {
@@ -34,7 +34,7 @@ export default {
     add_new_beneficiary(state, obj);
   },
   SET_CANT_DO_BENEFICIARY(state) {
-    state.canAddBeneficary = false;
+    state.canAddBeneficiary = false;
     state.nameAddBe = null;
   },
   DELETE_BENEFICIARY(state, obj) {
@@ -45,6 +45,9 @@ export default {
   },
   DELETE_BANK_ACCOUNT(state, obj) {
     delete_bank_account(state, obj);
+  },
+  ADD_NEW_TRAN(state, obj) {
+    add_new_tran(state, obj);
   }
 };
 
@@ -54,21 +57,22 @@ export default {
  */
 
 // #region list functions of mutations
-var get_accounts = async(state, obj) => {  
-  var obj_ = {...obj }
-  delete obj_.router;
-  try {
-    const auth = await Vue.axios.post( "http://localhost:1704/api/account/accounts/", null , { headers: { "x-access-token": obj_.token }});
-    if(auth) {
-      state.accounts = auth.data;
-      state.isLogin = true;
-    }
-  } catch (err) {  // access-token expire
-    if (err.response.status === 405) {
-      obj.router.push("/login");
-    }
-  } 
-} 
+// var get_accounts = async(state, obj) => {  
+//   var obj_ = {...obj }
+//   delete obj_.router;
+//   try {
+//     const auth = await Vue.axios.post( "http://localhost:1704/api/account/accounts/", null , { headers: { "x-access-token": obj_.token }});
+//     if(auth) {
+//       state.accounts = auth.data;
+//       console.log(state.accounts);
+//       state.isLogin = true;
+//     }
+//   } catch (err) {  // access-token expire
+//     if (err.response.status === 405) {
+//       obj.router.push("/login");
+//     }
+//   } 
+// } 
  var login = (state, account) =>{
   var router = account.router;
     var acc = { ...account };
@@ -208,7 +212,7 @@ var update_beneficiary = async (state, obj) => {
     const user = await Vue.axios.post( "http://localhost:1704/api/account/update_beneficiary/", sgname , { headers: { "x-access-token": obj.token }});
     if(user) {
       setMessage(state, "Update beneficiary successful !", true);
-      state.canAddBeneficary = false;
+      state.canAddBeneficiary = false;
       state.beneficiaries.find((o, i) => {
         if (o.account_number === sgname.account_number) {
             state.beneficiaries[i].suggested_name = sgname.sg_name;
@@ -235,11 +239,11 @@ var chech_bank_valid = async (state, obj) =>{
   var number = {
     ...obj.number
   }
-  state.canAddBeneficary = false;
+  state.canAddBeneficiary = false;
   try {
     const num_ber = await Vue.axios.post( "http://localhost:1704/api/account/check_bank_valid/", number , { headers: { "x-access-token": obj.token }});
     if(num_ber) {
-      state.canAddBeneficary = true;
+      state.canAddBeneficiary = true;
       state.nameAddBe = num_ber.data.name + " " + num_ber.data.first_name;
       setMessage(state, "You can add this bank account number !", true)
 
@@ -256,7 +260,39 @@ var chech_bank_valid = async (state, obj) =>{
   } 
  }
 }
+var add_new_tran = async (state, obj) =>{
+  var tr = {
+    ...obj.transaction
+  }
+  console.log(tr);
+  try {
+    const num_ber = await Vue.axios.post( "http://localhost:1704/api/account/tr/", tr , { headers: { "x-access-token": obj.token }});
+    if(num_ber) {
+      state.transactions = [
+        ...state.transactions,
+        {
+          account_send : tr.send,
+          account_recieve: tr.recieve,
+          number_money: tr.money,
+          note: tr.note
+        }
+      ]
+      setMessage(state, "Transfer successful !", true)
+      state.canAddTransfer = false;
 
+    } else {
+      setMessage(state, "Transfer fail !", false);
+    }
+
+  } catch (err) {  // access-token expire
+    if (err.response.status === 405) {
+      obj.router.push("/login");
+    }
+    else {
+      setMessage(state, "Transfer fail !", false);
+  } 
+ }
+} 
 
 var add_new_beneficiary = async (state, obj) =>{
   var be = {
@@ -273,7 +309,7 @@ var add_new_beneficiary = async (state, obj) =>{
         }
       ]
       setMessage(state, "Add new beneficiary successful !", true)
-      state.canAddBeneficary = false;
+      state.canAddBeneficiary = false;
     //  get_beneficiary(state, obj);
 
     } else {
@@ -305,7 +341,7 @@ var delete_beneficiary = async (state, obj) => {
 
       state.beneficiaries = list_be;    
       setMessage(state, "Delete beneficiary successful !", true)
-      state.canAddBeneficary = false;
+      state.canAddBeneficiary = false;
     //  get_beneficiary(state, obj);
 
     } else {
