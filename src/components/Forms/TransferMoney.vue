@@ -10,7 +10,7 @@
         <div class="md-layout">
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Tài khoản nguồn</label>
+              <label>From</label>
               <md-select required v-model="send">
                 <md-option v-for="account in accounts" v-bind:key="account.balance" :value="account.account_number" >{{ account.account_number }}</md-option>
               </md-select>
@@ -18,7 +18,7 @@
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Reciever Account</label>
+              <label>To</label>
               <md-input v-model="recieve" type="number"></md-input>
             </md-field>
           </div>
@@ -30,13 +30,13 @@
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Nội dung gửi</label>
+              <label>Note</label>
               <md-input v-model="note" type="text"> </md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Chọn hình thức thanh toán</label>
+              <label>service charge</label>
               <md-select v-model="selected">
                 <md-option value="0">sender</md-option>
                 <md-option value="1">receiver</md-option>

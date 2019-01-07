@@ -25,6 +25,7 @@
 
 
                 </md-table-row>
+                <md-button to="/transfer" class="md-raised md-success">Transfer</md-button>
                     <span v-bind:class="{'success': this.$store.state.notifications.status, 'error': !this.$store.state.notifications.status}" v-if="this.$store.state.notifications.msg"> {{this.$store.state.notifications.msg}} </span>
 
                 </md-table>
